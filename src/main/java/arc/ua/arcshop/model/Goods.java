@@ -1,6 +1,5 @@
 package arc.ua.arcshop.model;
 
-
 import arc.ua.arcshop.dto.GoodsDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,11 @@ public class Goods {
     @Column(nullable = false)
     private String manufacturer;
     @Column(nullable = false)
-    private Integer price;
+    private Double price;
     @Column(nullable = false)
     private Integer count;
 
-    public Goods(String name, String type, String manufacturer, Integer price, Integer count) {
+    public Goods(String name, String type, String manufacturer, Double price, Integer count) {
         this.name = name;
         this.type = type;
         this.manufacturer = manufacturer;
@@ -35,7 +34,7 @@ public class Goods {
         this.count = count;
     }
 
-    public static Goods of(String name,String type, String manufacturer, Integer price, Integer count) {
+    public static Goods of(String name,String type, String manufacturer, Double price, Integer count) {
         return new Goods(name,type, manufacturer, price, count);
     }
 

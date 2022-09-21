@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface GoodsService {
 
-    List<GoodsDTO> getGoods();
+    List<GoodsDTO> getGoods(Pageable pageable);
+
+    long count();
 
     void addGoods(GoodsDTO goodsDTO);
+
 }

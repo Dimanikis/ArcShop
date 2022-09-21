@@ -4,14 +4,11 @@ import arc.ua.arcshop.dto.GoodsDTO;
 import arc.ua.arcshop.model.Goods;
 import arc.ua.arcshop.repository.GoodsRepository;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.Specification.where;
 
 @Service
 public class GoodsServiceImpl implements GoodsService{
@@ -36,8 +33,8 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Transactional(readOnly = true)
-    public List<GoodsDTO> getGoods() {
-        List<Goods> list = goodsRepository.findAll();
+    public List<GoodsDTO> getGoods(Pageable pageable) {
+        List<Goods> list = goodsRepository.findAll(pageable).getContent();
         List<GoodsDTO> res = new ArrayList<>();
 
         for (Goods loc : list)
@@ -46,25 +43,10 @@ public class GoodsServiceImpl implements GoodsService{
         return res;
     }
 
-    /*
-    public List<GoodsDTO> findGoodsByCriteria(GoodsDTO goodsDTO) {
-
-        Specification<Goods> specification = null;
-
-        where(specification).and(
-                (root, criteriaQuery, criteriaBuilder) ->
-                        criteriaBuilder.equal(root.get("available"), goodsDTO.isAvailable())
-        );
-
-        where(specification).and(
-                (root, criteriaQuery, criteriaBuilder) ->
-                        criteriaBuilder.equal(root.get("reserved"), goodsDTO.isReserved)
-        );
-
-        List<Goods> goods = goodsRepository.findAll(specification);
+    @Override
+    @Transactional(readOnly = true)
+    public long count() {
+        return goodsRepository.count();
     }
-
-     */
-
 
 }

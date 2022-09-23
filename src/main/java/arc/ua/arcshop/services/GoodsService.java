@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GoodsService {
 
-    List<GoodsDTO> getGoods(Pageable pageable);
+    List<GoodsDTO> getGoods(Pageable pageable,String manufacturer, String name, String type, int min, int max);
 
     long count();
 

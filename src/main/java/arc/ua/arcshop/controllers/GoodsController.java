@@ -31,8 +31,13 @@ public class GoodsController {
     }
 
     @GetMapping("getGoods")
-    public List<GoodsDTO> getGoods(@RequestParam(required = false, defaultValue = "0") int page){
-        return goodsService.getGoods(PageRequest.of(page, PAGE_SIZE, Sort.Direction.DESC, "id"));
+    public List<GoodsDTO> getGoods(@RequestParam(required = false, defaultValue = "0") int page,
+                                   @RequestParam(required = false) String manufacturer,
+                                   @RequestParam(required = false) String name,
+                                   @RequestParam(required = false) String type,
+                                   @RequestParam(required = false, defaultValue = "0") int min,
+                                   @RequestParam(required = false, defaultValue = "2 147 483 647") int max){
+        return goodsService.getGoods(PageRequest.of(page, PAGE_SIZE, Sort.Direction.DESC, "id"), manufacturer, name, type, min, max);
 
     }
 

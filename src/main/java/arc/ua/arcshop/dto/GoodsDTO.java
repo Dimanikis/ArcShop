@@ -1,10 +1,8 @@
 package arc.ua.arcshop.dto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 public class GoodsDTO {
 
     private String name;

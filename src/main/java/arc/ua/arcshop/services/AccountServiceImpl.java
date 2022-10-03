@@ -15,14 +15,20 @@ public class AccountServiceImpl implements AccountService {
         this.accountRepository = accountRepository;
     }
 
-    @Transactional
+    @Transactional //////////
     @Override
     public void addAccount(AccountDTO accountDTO){
-        if(accountRepository.existsByEmail(accountDTO.getEmail()))
+        if(accountRepository.existsByLogin(accountDTO.getLogin()))
             return;
 
         Account account = Account.fromDTO(accountDTO);
 
         accountRepository.save(account);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public AccountDTO getAccount(String login){
+        return accountRepository.findByLogin(login).toDTO();
     }
 }

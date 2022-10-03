@@ -17,27 +17,32 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(nullable = false)
+
+    private String login;
+
+    private String password;
     private String name;
     private String email;
     private String pictureUrl;
 
-    private Account(String name, String email, String pictureUrl) {
+    private Account(String login, String password, String name, String email, String pictureUrl) {
+        this.login = login;
+        this.password = password;
         this.name = name;
         this.email = email;
         this.pictureUrl = pictureUrl;
     }
 
-    public static Account of(String name, String email, String pictureUrl) {
-        return new Account(name, email, pictureUrl);
+    public static Account of(String login, String password, String name, String email, String pictureUrl) {
+        return new Account(login, password, name, email, pictureUrl);
     }
 
     public AccountDTO toDTO() {
-        return AccountDTO.of(name, email, pictureUrl);
+        return AccountDTO.of(login, password, name, email, pictureUrl);
     }
 
     public static Account fromDTO(AccountDTO accountDTO) {
-        return Account.of(accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
+        return Account.of(accountDTO.getLogin(), accountDTO.getPassword(), accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
     }
 
 }

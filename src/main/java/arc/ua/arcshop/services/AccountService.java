@@ -8,5 +8,7 @@ public interface AccountService {
 
     void addAccount(AccountDTO accountDTO);
 
+    AccountDTO getAccount(String login);
+
 
 }

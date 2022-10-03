@@ -27,7 +27,12 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Transactional
+    @Override
     public void addGoods(GoodsDTO goodsDTO){
+
+        if(goodsDTO.getPrice() < 0){
+            throw new IllegalArgumentException("price must be positive");
+        }
         if(goodsRepository.existsByName(goodsDTO.getName())){
             Goods goods = goodsRepository.findByName(goodsDTO.getName());
             goods.setCount(goods.getCount() + goodsDTO.getCount());
@@ -39,6 +44,7 @@ public class GoodsServiceImpl implements GoodsService{
     }
 
     @Transactional(readOnly = true)
+    @Override
     public List<GoodsDTO> getGoods(Pageable pageable,String manufacturer, String name, String type, int min, int max) {
 
         QGoods goods = QGoods.goods;
@@ -62,8 +68,8 @@ public class GoodsServiceImpl implements GoodsService{
         return res;
     }
 
-    @Override
     @Transactional(readOnly = true)
+    @Override
     public long count() {
         return goodsRepository.count();
     }

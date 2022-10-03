@@ -34,7 +34,9 @@ public class AuthHandler implements AuthenticationSuccessHandler {
 
         AccountDTO accountDTO = AccountDTO.of(
                 (String) attributes.get("email"),
+                null,
                 (String) attributes.get("name"),
+                (String) attributes.get("email"),
                 (String) attributes.get("picture")
         );
 

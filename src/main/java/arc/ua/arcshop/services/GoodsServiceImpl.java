@@ -62,8 +62,8 @@ public class GoodsServiceImpl implements GoodsService{
         List<Goods> list = goodsRepository.findAll(booleanBuilder,pageable).getContent();
         List<GoodsDTO> res = new ArrayList<>();
 
-        for (Goods loc : list)
-            res.add(loc.toDTO());
+        for (Goods g : list)
+            res.add(g.toDTO());
 
         return res;
     }

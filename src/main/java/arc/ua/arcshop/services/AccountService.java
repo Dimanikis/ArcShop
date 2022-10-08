@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AccountService {
 
-    void addAccount(AccountDTO accountDTO);
+    boolean addAccount(AccountDTO accountDTO);
 
     AccountDTO getAccount(String login);
 

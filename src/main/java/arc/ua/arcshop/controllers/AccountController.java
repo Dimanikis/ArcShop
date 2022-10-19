@@ -40,17 +40,6 @@ public class AccountController {
 
     }
 
-    @PostMapping(path = "login")
-    public @ResponseBody AccountDTO getAuthUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) {
-            return null;
-        }
-        Object principal = auth.getPrincipal();
-        User user = (principal instanceof User) ? (User) principal : null;
-        return Objects.nonNull(user) ? accountService.getAccount(user.getUsername()) : null;
-    }
-
     @GetMapping("logviagoogle")
     public AccountDTO logViaGoogle(OAuth2AuthenticationToken auth){
         Map<String, Object> attrs = auth.getPrincipal().getAttributes();

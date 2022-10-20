@@ -9,8 +9,12 @@ public interface GoodsService {
 
     List<GoodsDTO> getGoods(Pageable pageable,String manufacturer, String name, String type, int min, int max);
 
-    long count();
-
     void addGoods(GoodsDTO goodsDTO);
+
+    void updateGoods();
+
+    void deleteGoods();
+
+    long count();
 
 }

@@ -24,7 +24,8 @@ export default {};
 
 	&:hover {
 		background-color: white;
-		color: $color-main-green;
+		border: 1px solid $color-main-green;
+		
 	}
 }
 

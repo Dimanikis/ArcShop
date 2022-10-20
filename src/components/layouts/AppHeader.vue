@@ -3,6 +3,8 @@ import LogoItem from '../LogoItem.vue';
 import NavigationItem from '../NavigationItem.vue';
 import BasketPreview from './BasketPreview.vue';
 import { mapGetters } from 'vuex';
+import AuthModal from './AuthModal.vue';
+
 
 export default {
 	data() {
@@ -12,10 +14,14 @@ export default {
 			isValid: false,
 		};
 	},
-	components: { LogoItem, NavigationItem, BasketPreview },
+	components: { LogoItem, NavigationItem, BasketPreview, AuthModal },
 	methods: {
 		openBasket() {
 			document.querySelector('.basket').classList.add('basket--active');
+			document.body.classList.add('nonscroll');
+		},
+		openAuth() {
+			document.querySelector('#AuthModal').classList.add('modal--active');
 			document.body.classList.add('nonscroll');
 		},
 		search(event) {
@@ -145,8 +151,14 @@ export default {
 					</svg>
 					<div class="basket-label" v-if="getBasketQty">{{ getBasketQty }}</div>
 				</div>
+				<div class="header__icons-wrapper" @click="openAuth">
+					<svg class="svg-busket-dims">
+						<use xlink:href="@/assets/files/sprite.svg#user"></use>
+					</svg>
+				</div>
 			</div>
 		</div>
+		<AuthModal />
 		<BasketPreview />
 	</header>
 </template>

@@ -9,14 +9,11 @@ public interface GoodsService {
 
     List<GoodsDTO> getGoods(Pageable pageable,String manufacturer, String name, String type, int min, int max);
 
-    void addGoods(GoodsDTO goodsDTO);
+    boolean addGoods(GoodsDTO goodsDTO);
 
-    /*
-    void updateGoods();
+    boolean updateGoods(GoodsDTO goodsDTO);
 
-    void deleteGoods();
-
-     */
+    void deleteGoods(List<Long> idList);
 
     long count();
 

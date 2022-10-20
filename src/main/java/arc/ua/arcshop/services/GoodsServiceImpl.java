@@ -1,6 +1,7 @@
 package arc.ua.arcshop.services;
 
 import arc.ua.arcshop.dto.GoodsDTO;
+import arc.ua.arcshop.model.Account;
 import arc.ua.arcshop.model.Goods;
 import arc.ua.arcshop.model.QGoods;
 import arc.ua.arcshop.repository.GoodsRepository;
@@ -28,19 +29,14 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Transactional
     @Override
-    public void addGoods(GoodsDTO goodsDTO){
+    public boolean addGoods(GoodsDTO goodsDTO){
 
-        if(goodsDTO.getPrice() < 0){
-            throw new IllegalArgumentException("price must be positive");
-        }
         if(goodsRepository.existsByName(goodsDTO.getName())){
-            Goods goods = goodsRepository.findByName(goodsDTO.getName());
-            goods.setCount(goods.getCount() + goodsDTO.getCount());
-            goodsRepository.save(goods);
-            return;
+            return false;
         }
 
         goodsRepository.save(Goods.fromDTO(goodsDTO));
+        return true;
     }
 
     @Transactional(readOnly = true)
@@ -66,6 +62,22 @@ public class GoodsServiceImpl implements GoodsService{
             res.add(g.toDTO());
 
         return res;
+    }
+
+    @Transactional
+    @Override
+    public boolean updateGoods(GoodsDTO goodsDTO){
+        if( ! goodsRepository.existsByName(goodsDTO.getName()))
+            return false;
+
+        goodsRepository.save(Goods.fromDTO(goodsDTO));
+        return true;
+    }
+
+    @Transactional
+    @Override
+    public void deleteGoods(List<Long> idList){
+        idList.forEach(goodsRepository::deleteById);
     }
 
     @Transactional(readOnly = true)

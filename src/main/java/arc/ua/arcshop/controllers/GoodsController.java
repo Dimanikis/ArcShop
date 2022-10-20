@@ -1,7 +1,9 @@
 package arc.ua.arcshop.controllers;
 
+import arc.ua.arcshop.dto.AccountDTO;
 import arc.ua.arcshop.dto.GoodsDTO;
 import arc.ua.arcshop.dto.PageCountDTO;
+import arc.ua.arcshop.model.AccountRole;
 import arc.ua.arcshop.services.GoodsService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,10 +26,16 @@ public class GoodsController {
     }
 
     @PostMapping("addGoods")
-    public ResponseEntity<Void> addGoods(@RequestBody GoodsDTO goodsDTO){
-        goodsService.addGoods(goodsDTO);
+    public ResponseEntity<String> addGoods(@RequestBody GoodsDTO goodsDTO){
+        if(goodsDTO.getPrice() < 0){
+            return new ResponseEntity<>("price must be positive",HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        if ( ! goodsService.addGoods(goodsDTO)) {
+            return new ResponseEntity<>("goods already exist",HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("created",HttpStatus.OK);
     }
 
     @GetMapping("getGoods")
@@ -38,12 +46,34 @@ public class GoodsController {
                                    @RequestParam(required = false, defaultValue = "0") int min,
                                    @RequestParam(required = false, defaultValue = "2 147 483 647") int max){
         return goodsService.getGoods(PageRequest.of(page, PAGE_SIZE, Sort.Direction.DESC, "id"), manufacturer, name, type, min, max);
+    }
 
+    @PostMapping("updateGoods")
+    public ResponseEntity<String> updateGoods(@RequestBody GoodsDTO goodsDTO){
+        if(goodsDTO.getPrice() < 0){
+            return new ResponseEntity<>("price must be positive",HttpStatus.OK);
+        }
+
+        if ( ! goodsService.updateGoods(goodsDTO)) {
+            return new ResponseEntity<>("goods not found",HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("updated",HttpStatus.OK);
+    }
+
+    @PostMapping("deleteGoods")
+    public ResponseEntity<String> deleteGoods(@RequestParam List<Long> ids){
+        goodsService.deleteGoods(ids);
+        return new ResponseEntity<>("deleted",HttpStatus.OK);
     }
 
     @GetMapping("count")
     public PageCountDTO count() {
         return PageCountDTO.of(goodsService.count(), PAGE_SIZE);
+    }
+
+    private void goodsChecker(GoodsDTO goodsDTO){
+
     }
 
 

@@ -12,6 +12,17 @@
 <body>
 <main role="main" class="container">
     <div class="starter-template">
+
+        <form method="POST" action="/perform_login">
+            <h2>Вход в систему</h2>
+            <div>
+                <input name="username" type="text" placeholder="Username"
+                       autofocus="true"/>
+                <input name="password" type="password" placeholder="Password"/>
+                <button type="submit">Log In</button>
+                <h4><a href="/registration">Зарегистрироваться</a></h4>
+            </div>
+        </form>
         <p>Prog.kiev.ua task manager</p>
         <button type="button" class="btn btn-primary btn-lg" onclick="goToURL('oauth2/authorization/google');">Login via Google</button>
     </div>

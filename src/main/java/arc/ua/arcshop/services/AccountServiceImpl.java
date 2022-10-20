@@ -3,6 +3,8 @@ package arc.ua.arcshop.services;
 import arc.ua.arcshop.dto.AccountDTO;
 import arc.ua.arcshop.model.Account;
 import arc.ua.arcshop.repository.AccountRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService, UserDetailsService {
@@ -46,6 +50,10 @@ public class AccountServiceImpl implements AccountService, UserDetailsService {
             throw new UsernameNotFoundException(String.format("User %s is not found", login));
         }
 
-        return new User(account.getLogin(), account.getPassword(), true, true, true, true, new HashSet<>());
+        List<GrantedAuthority> roles = Arrays.asList(
+                new SimpleGrantedAuthority(account.getRole().toString())
+        );
+
+        return new User(account.getLogin(), account.getPassword(), roles);
     }
 }

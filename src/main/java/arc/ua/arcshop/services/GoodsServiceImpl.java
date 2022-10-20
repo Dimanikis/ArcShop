@@ -68,8 +68,6 @@ public class GoodsServiceImpl implements GoodsService{
         return res;
     }
 
-    public void
-
     @Transactional(readOnly = true)
     @Override
     public long count() {

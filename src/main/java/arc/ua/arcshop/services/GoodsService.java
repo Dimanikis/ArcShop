@@ -11,9 +11,12 @@ public interface GoodsService {
 
     void addGoods(GoodsDTO goodsDTO);
 
+    /*
     void updateGoods();
 
     void deleteGoods();
+
+     */
 
     long count();
 

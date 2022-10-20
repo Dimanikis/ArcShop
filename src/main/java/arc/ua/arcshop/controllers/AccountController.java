@@ -1,6 +1,7 @@
 package arc.ua.arcshop.controllers;
 
 import arc.ua.arcshop.dto.AccountDTO;
+import arc.ua.arcshop.model.AccountRole;
 import arc.ua.arcshop.services.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class AccountController {
     public ResponseEntity<String> register(@RequestBody AccountDTO accountDTO){
         String passHash = passwordEncoder.encode(accountDTO.getPassword());
 
-        if ( ! accountService.addAccount(AccountDTO.of(accountDTO.getLogin(), passHash, null, null, null))) {
+        if ( ! accountService.addAccount(AccountDTO.of(accountDTO.getLogin(), passHash, AccountRole.USER, null, null, null))) {
             return new ResponseEntity<>("login already exist",HttpStatus.OK);
 
         }
@@ -46,11 +47,12 @@ public class AccountController {
 
         String login = (String) attrs.get("login");
         String password = (String) attrs.get("password");
+        AccountRole role = (AccountRole) attrs.get("role");
         String name = (String) attrs.get("name");
         String email = (String) attrs.get("email");
         String pictureUrl = (String) attrs.get("picture");
 
-        return AccountDTO.of(login, password, name, email, pictureUrl);
+        return AccountDTO.of(login, password, role, name, email, pictureUrl);
     }
 
 

@@ -1,6 +1,9 @@
 package arc.ua.arcshop.configs;
 
+import arc.ua.arcshop.dto.AccountDTO;
 import arc.ua.arcshop.dto.GoodsDTO;
+import arc.ua.arcshop.model.AccountRole;
+import arc.ua.arcshop.services.AccountService;
 import arc.ua.arcshop.services.GoodsService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +20,7 @@ public class AppConfig {
     }
 
     @Bean
-    public CommandLineRunner demo(final GoodsService goodsService) {
+    public CommandLineRunner demo(final GoodsService goodsService, final AccountService accountService) {
         return strings -> {
             goodsService.addGoods(new GoodsDTO("test1", "testType", "mi", 1.00, 5));
             goodsService.addGoods(new GoodsDTO("test2", "testType", "mi", 0.01, 5));
@@ -30,6 +33,7 @@ public class AppConfig {
             goodsService.addGoods(new GoodsDTO("test9", "testType", "samsung", 10.10, 5));
             goodsService.addGoods(new GoodsDTO("test10", "testType", "apple", 11.11, 5));
             goodsService.addGoods(new GoodsDTO("test11", "testType", "apple", 1010.00, 5));
+            accountService.addAccount(new AccountDTO("user1", passwordEncoder().encode("1234"), AccountRole.ADMIN,null,null,null));
         };
     }
 }

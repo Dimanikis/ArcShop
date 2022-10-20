@@ -21,28 +21,32 @@ public class Account {
     private String login;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private AccountRole role;
     private String name;
     private String email;
     private String pictureUrl;
 
-    private Account(String login, String password, String name, String email, String pictureUrl) {
+    private Account(String login, String password, AccountRole role, String name, String email, String pictureUrl) {
         this.login = login;
         this.password = password;
+        this.role = role;
         this.name = name;
         this.email = email;
         this.pictureUrl = pictureUrl;
     }
 
-    public static Account of(String login, String password, String name, String email, String pictureUrl) {
-        return new Account(login, password, name, email, pictureUrl);
+    public static Account of(String login, String password, AccountRole role, String name, String email, String pictureUrl) {
+        return new Account(login, password, role, name, email, pictureUrl);
     }
 
     public AccountDTO toDTO() {
-        return AccountDTO.of(login, password, name, email, pictureUrl);
+        return AccountDTO.of(login, password, role, name, email, pictureUrl);
     }
 
     public static Account fromDTO(AccountDTO accountDTO) {
-        return Account.of(accountDTO.getLogin(), accountDTO.getPassword(), accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
+        return Account.of(accountDTO.getLogin(), accountDTO.getPassword(), accountDTO.getRole(), accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
     }
 
 }

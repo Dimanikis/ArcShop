@@ -1,6 +1,7 @@
 package arc.ua.arcshop.configs;
 
 import arc.ua.arcshop.dto.AccountDTO;
+import arc.ua.arcshop.model.AccountRole;
 import arc.ua.arcshop.services.AccountService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -35,6 +36,7 @@ public class AuthHandler implements AuthenticationSuccessHandler {
         AccountDTO accountDTO = AccountDTO.of(
                 (String) attributes.get("email"),
                 null,
+                AccountRole.USER,
                 (String) attributes.get("name"),
                 (String) attributes.get("email"),
                 (String) attributes.get("picture")

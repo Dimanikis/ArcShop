@@ -42,6 +42,6 @@ public class Goods {
        return Goods.of(goodsDTO.getName(),goodsDTO.getType(),goodsDTO.getManufacturer(),goodsDTO.getPrice(),goodsDTO.getCount());
     }
     public GoodsDTO toDTO() {
-        return GoodsDTO.of(name, type, manufacturer, price, count);
+        return GoodsDTO.of(id, name, type, manufacturer, price, count);
     }
 }

@@ -1,7 +1,7 @@
 function goToURL(url) {
     location.href = url;
 }async function goToURL(url) {
-    let response = await fetch("https://arc-shop.herokuapp.com/acc/register", {
+    let response = await fetch("https://arc-shop.herokuapp.com/perform_login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

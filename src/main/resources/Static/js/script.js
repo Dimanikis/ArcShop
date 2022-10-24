@@ -21,6 +21,6 @@ async function submit() {
   if (signIn) {
     await request("perform_login");
   } else {
-    await request("/acc/register");
+    await request("acc/register");
   }
 }

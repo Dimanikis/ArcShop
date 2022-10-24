@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     private final AccountServiceImpl accountService;
@@ -42,15 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*");
-    }
-
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/")
@@ -75,6 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                     .logout()
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login");
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
     }
 
 

@@ -58,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login.html")
                     .loginProcessingUrl("/perform_login")
                     .failureUrl("/login.html?error")
+                    .permitAll()
                     .defaultSuccessUrl("/", true)
                 .and()
                     .oauth2Login()

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.Objects;
 
-
+@CrossOrigin()
 @RestController
 @RequestMapping("/acc")
 public class AccountController {

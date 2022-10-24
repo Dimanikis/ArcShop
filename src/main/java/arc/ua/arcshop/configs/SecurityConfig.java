@@ -41,24 +41,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/")
                     .hasAnyRole("USER", "ADMIN", "MODERATOR")
-                .antMatchers("/login", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/**")
+                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/**")
                     .permitAll()
                 .anyRequest()
                     .authenticated()
                 .and()
                     .formLogin()
+                    .loginPage("/login.html")
                     .loginProcessingUrl("/perform_login")
-                    .failureUrl("/login?error")
+                    .failureUrl("/login.html?error")
                     .defaultSuccessUrl("/", true)
                 .and()
                     .oauth2Login()
+                    .loginPage("/login.html")
                     .successHandler(authenticationSuccessHandler)
                 .and()
                     .httpBasic()
                 .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl("/login.html");
     }
 
 

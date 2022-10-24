@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/")
                     .hasAnyRole("USER", "ADMIN", "MODERATOR")
-                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/**")
+                .antMatchers("/login.html", "/perform_login", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/**")
                     .permitAll()
                 .anyRequest()
                     .authenticated()

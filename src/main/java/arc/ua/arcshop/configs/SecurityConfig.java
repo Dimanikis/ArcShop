@@ -47,13 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticated()
                 .and()
                     .formLogin()
-                    .loginPage("/login.html")
+
                     .loginProcessingUrl("/perform_login")
-                    .failureUrl("/login.html?error")
+                    .failureUrl("/login?error")
                     .defaultSuccessUrl("/", true)
                 .and()
                     .oauth2Login()
-                    .loginPage("/login.html")
+
                     .successHandler(authenticationSuccessHandler)
                 .and()
                     .httpBasic()

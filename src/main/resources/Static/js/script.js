@@ -1,12 +1,12 @@
 let User = {
-  login: "user123",
+  login: "user1",
   password: "1234",
 };
-let signIn = false;
+let signIn = true;
 
 async function request(url) {
   console.log(User);
-  let response = await fetch(`http://arc-shop.herokuapp.com/${url}`, {
+  let response = await fetch(`https://arc-shop.herokuapp.com/${url}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

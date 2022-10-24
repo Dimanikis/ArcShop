@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/")
                     .hasAnyRole("USER", "ADMIN", "MODERATOR")
-                .antMatchers("/login.html", "/perform_login", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/**")
+                .antMatchers("/login.html", "/perform_login", "/js/**", "/css/**", "/favicon.ico", "/logout", "/acc/register")
                     .permitAll()
                 .anyRequest()
                     .authenticated()
@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .formLogin()
                     .loginPage("/login.html")
                     .loginProcessingUrl("/perform_login")
-                    .failureUrl("/login?error")
+                    .failureUrl("/login.html?error")
                     .defaultSuccessUrl("/", true)
                 .and()
                     .oauth2Login()
@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl("/login.html");
     }
 
     @Bean

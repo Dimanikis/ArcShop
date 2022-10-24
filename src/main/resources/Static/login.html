@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/login.css">
     <script src="js/goto.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
 <main role="main" class="container">
@@ -20,11 +21,10 @@
                        autofocus="true"/>
                 <input name="password" type="password" placeholder="Password"/>
                 <button type="submit">Log In</button>
-                <h4><a href="/registration">Зарегистрироваться</a></h4>
             </div>
         </form>
-        <p>Prog.kiev.ua task manager</p>
         <button type="button" class="btn btn-primary btn-lg" onclick="goToURL('oauth2/authorization/google');">Login via Google</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="submit();">test</button>
     </div>
 </main>
 

@@ -34,11 +34,12 @@ public class AccountController {
         String passHash = passwordEncoder.encode(accountDTO.getPassword());
 
         if ( ! accountService.addAccount(AccountDTO.of(accountDTO.getLogin(), passHash, AccountRole.USER, null, null, null))) {
-            return new ResponseEntity<>("login already exist",HttpStatus.OK);
-
+            return new ResponseEntity<>("""
+                            {"status": "login already exist"}""",HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("created",HttpStatus.OK);
+        return new ResponseEntity<>("""
+                            {"status": "created"}""",HttpStatus.OK);
 
     }
 

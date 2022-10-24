@@ -29,14 +29,17 @@ public class GoodsController {
     @PostMapping("addGoods")
     public ResponseEntity<String> addGoods(@RequestBody GoodsDTO goodsDTO){
         if(goodsDTO.getPrice() < 0){
-            return new ResponseEntity<>("price must be positive",HttpStatus.OK);
+            return new ResponseEntity<>("""
+                            {"status": "price must be positive"}""",HttpStatus.OK);
         }
 
         if ( ! goodsService.addGoods(goodsDTO)) {
-            return new ResponseEntity<>("goods already exist",HttpStatus.OK);
+            return new ResponseEntity<>("""
+                            {"status": "goods already exist"}""",HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("created",HttpStatus.OK);
+        return new ResponseEntity<>("""
+                            {"status": "created"}""",HttpStatus.OK);
     }
 
     @GetMapping("getGoods")
@@ -52,20 +55,24 @@ public class GoodsController {
     @PostMapping("updateGoods")
     public ResponseEntity<String> updateGoods(@RequestBody GoodsDTO goodsDTO){
         if(goodsDTO.getPrice() < 0){
-            return new ResponseEntity<>("price must be positive",HttpStatus.OK);
+            return new ResponseEntity<>("""
+                            {"status": "price must be positive"}""",HttpStatus.OK);
         }
 
         if ( ! goodsService.updateGoods(goodsDTO)) {
-            return new ResponseEntity<>("goods not found",HttpStatus.OK);
+            return new ResponseEntity<>("""
+                            {"status": "goods not found"}""",HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("updated",HttpStatus.OK);
+        return new ResponseEntity<>("""
+                            {"status": "updated"}""",HttpStatus.OK);
     }
 
-    @PostMapping("deleteGoods")
+    @PostMapping("deleteGoods")/////////////////////////////////
     public ResponseEntity<String> deleteGoods(@RequestParam List<Long> ids){
         goodsService.deleteGoods(ids);
-        return new ResponseEntity<>("deleted",HttpStatus.OK);
+        return new ResponseEntity<>("""
+                            {"status": "deleted"}""",HttpStatus.OK);
     }
 
     @GetMapping("count")
@@ -73,7 +80,7 @@ public class GoodsController {
         return PageCountDTO.of(goodsService.count(), PAGE_SIZE);
     }
 
-    private void goodsChecker(GoodsDTO goodsDTO){
+    private void goodsChecker(GoodsDTO goodsDTO){/////////////////////////////////////
 
     }
 

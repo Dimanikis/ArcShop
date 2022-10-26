@@ -1,8 +1,8 @@
 package arc.ua.arcshop.configs;
 
-import arc.ua.arcshop.dto.AccountDTO;
-import arc.ua.arcshop.model.AccountRole;
-import arc.ua.arcshop.services.AccountService;
+import arc.ua.arcshop.dto.UserDTO;
+import arc.ua.arcshop.model.Role;
+import arc.ua.arcshop.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -18,10 +18,10 @@ import java.util.Map;
 @Component
 public class AuthHandler implements AuthenticationSuccessHandler {
 
-    private final AccountService accountService;
+    private final UserService userService;
 
-    public AuthHandler(AccountService accountService) {
-        this.accountService = accountService;
+    public AuthHandler(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -33,18 +33,18 @@ public class AuthHandler implements AuthenticationSuccessHandler {
 
         Map<String, Object> attributes = user.getAttributes();
 
-        AccountDTO accountDTO = AccountDTO.of(
+        UserDTO accountDTO = UserDTO.of(
                 (String) attributes.get("email"),
                 null,
-                AccountRole.USER,
                 (String) attributes.get("name"),
                 (String) attributes.get("email"),
-                (String) attributes.get("picture")
+                (String) attributes.get("picture"),
+                Role.USER
         );
 
 
 
-        accountService.addAccount(accountDTO);
+        userService.addUser(accountDTO);
 
         httpServletResponse.sendRedirect("/");
     }

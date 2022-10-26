@@ -1,8 +1,7 @@
 package arc.ua.arcshop.services;
 
-import arc.ua.arcshop.dto.AccountDTO;
-import arc.ua.arcshop.model.Account;
-import arc.ua.arcshop.repository.AccountRepository;
+import arc.ua.arcshop.dto.UserDTO;
+import arc.ua.arcshop.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,47 +12,46 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService, UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private final AccountRepository accountRepository;
+    private final UserRepository userRepository;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Transactional //////////
     @Override
-    public boolean addAccount(AccountDTO accountDTO){
-        if(accountRepository.existsByLogin(accountDTO.getLogin()))
+    public boolean addUser(UserDTO userDTO){
+        if(userRepository.existsByLogin(userDTO.getLogin()))
             return false;
 
-        Account account = Account.fromDTO(accountDTO);
-        accountRepository.save(account);
+        arc.ua.arcshop.model.User user =  arc.ua.arcshop.model.User.fromDTO(userDTO);
+        userRepository.save(user);
 
         return true;
     }
 
     @Transactional(readOnly = true)
     @Override
-    public AccountDTO getAccount(String login){
-        return accountRepository.findByLogin(login).toDTO();
+    public UserDTO getUser(String login){
+        return userRepository.findByLogin(login).toDTO();
     }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Account account = accountRepository.findByLogin(login);
-        if (account == null) {
+        arc.ua.arcshop.model.User user = userRepository.findByLogin(login);
+        if (user == null) {
             throw new UsernameNotFoundException(String.format("User %s is not found", login));
         }
 
         List<GrantedAuthority> roles = Arrays.asList(
-                new SimpleGrantedAuthority(account.getRole().toString())
+                new SimpleGrantedAuthority(user.getRole().toString())
         );
 
-        return new User(account.getLogin(), account.getPassword(), roles);
+        return new User(user.getLogin(), user.getPassword(), roles);
     }
 }

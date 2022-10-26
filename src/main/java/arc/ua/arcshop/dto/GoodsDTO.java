@@ -1,8 +1,12 @@
 package arc.ua.arcshop.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class GoodsDTO {
 
     private Long id;
@@ -11,15 +15,6 @@ public class GoodsDTO {
     private String manufacturer;
     private Double price;
     private Integer count;
-
-    public GoodsDTO(Long id,String name,String type, String manufacturer, Double price, Integer count) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.manufacturer = manufacturer;
-        this.price = price;
-        this.count = count;
-    }
 
     public static GoodsDTO of(String name, String type, String manufacturer, Double price, Integer count){
         return new GoodsDTO(null, name, type, manufacturer, price, count);

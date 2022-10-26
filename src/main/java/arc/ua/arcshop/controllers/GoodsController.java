@@ -1,9 +1,7 @@
 package arc.ua.arcshop.controllers;
 
-import arc.ua.arcshop.dto.AccountDTO;
 import arc.ua.arcshop.dto.GoodsDTO;
 import arc.ua.arcshop.dto.PageCountDTO;
-import arc.ua.arcshop.model.AccountRole;
 import arc.ua.arcshop.services.GoodsService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

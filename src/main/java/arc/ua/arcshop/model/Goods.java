@@ -2,13 +2,17 @@ package arc.ua.arcshop.model;
 
 import arc.ua.arcshop.dto.GoodsDTO;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 
-@Data
+
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 public class Goods {
     @Id

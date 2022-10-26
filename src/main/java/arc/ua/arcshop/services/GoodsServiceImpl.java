@@ -1,16 +1,11 @@
 package arc.ua.arcshop.services;
 
 import arc.ua.arcshop.dto.GoodsDTO;
-import arc.ua.arcshop.model.Account;
 import arc.ua.arcshop.model.Goods;
 import arc.ua.arcshop.model.QGoods;
 import arc.ua.arcshop.repository.GoodsRepository;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.binding.QuerydslPredicateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

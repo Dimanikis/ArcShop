@@ -59,22 +59,4 @@ public class UserController {
         return ResponseEntity.ok(token);
     }
 
-    /*
-    @GetMapping("logviagoogle")
-    public UserDTO logViaGoogle(OAuth2AuthenticationToken auth){
-        Map<String, Object> attrs = auth.getPrincipal().getAttributes();
-
-        String login = (String) attrs.get("login");
-        String password = (String) attrs.get("password");
-        Role role = (Role) attrs.get("role");
-        String name = (String) attrs.get("name");
-        String email = (String) attrs.get("email");
-        String pictureUrl = (String) attrs.get("picture");
-
-        return UserDTO.of(login, password, name, email, pictureUrl, role);
-    }
-
-     */
-
-
 }

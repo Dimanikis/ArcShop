@@ -26,6 +26,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String rToken;
+
     private User(String login, String password,String name, String email, String pictureUrl, Role role) {
         this.login = login;
         this.password = password;
@@ -44,7 +46,7 @@ public class User {
     }
 
     public static User fromDTO(UserDTO userDTO) {
-        return User.of(userDTO.getLogin(), userDTO.getPassword(),userDTO.getName(), userDTO.getEmail(), userDTO.getPictureUrl(), userDTO.getRole());
+        return of(userDTO.getLogin(), userDTO.getPassword(),userDTO.getName(), userDTO.getEmail(), userDTO.getPictureUrl(), userDTO.getRole());
     }
 
 }

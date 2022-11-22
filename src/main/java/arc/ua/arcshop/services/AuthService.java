@@ -19,7 +19,6 @@ import java.util.Map;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final Map<String, String> refreshStorage = new HashMap<>();
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
 
@@ -37,7 +36,8 @@ public class AuthService {
         if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
             final String refreshToken = jwtProvider.generateRefreshToken(user);
-            refreshStorage.put(user.getLogin(), refreshToken);
+            user.setRToken(refreshToken);
+            userRepository.save(user);
             return new JwtResponse(accessToken, refreshToken);
         } else {
             throw new AuthException("Неправильный пароль");
@@ -48,12 +48,12 @@ public class AuthService {
         if (jwtProvider.validateRefreshToken(refreshToken)) {
             final Claims claims = jwtProvider.getRefreshClaims(refreshToken);
             final String login = claims.getSubject();
-            final String saveRefreshToken = refreshStorage.get(login);
+            final User user = userRepository.findByLogin(login);
+            if (user == null) {
+                throw new AuthException("Пользователь не найден");
+            }
+            final String saveRefreshToken = user.getRToken();
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final User user = userRepository.findByLogin(login);
-                if (user == null) {
-                    throw new AuthException("Пользователь не найден");
-                }
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 return new JwtResponse(accessToken, null);
             }
@@ -65,15 +65,16 @@ public class AuthService {
         if (jwtProvider.validateRefreshToken(refreshToken)) {
             final Claims claims = jwtProvider.getRefreshClaims(refreshToken);
             final String login = claims.getSubject();
-            final String saveRefreshToken = refreshStorage.get(login);
+            final User user = userRepository.findByLogin(login);
+            if (user == null) {
+                throw new AuthException("Пользователь не найден");
+            }
+            final String saveRefreshToken = user.getRToken();
             if (saveRefreshToken != null && saveRefreshToken.equals(refreshToken)) {
-                final User user = userRepository.findByLogin(login);
-                if (user == null) {
-                    throw new AuthException("Пользователь не найден");
-                }
                 final String accessToken = jwtProvider.generateAccessToken(user);
                 final String newRefreshToken = jwtProvider.generateRefreshToken(user);
-                refreshStorage.put(user.getLogin(), newRefreshToken);
+                user.setRToken(newRefreshToken);
+                userRepository.save(user);
                 return new JwtResponse(accessToken, newRefreshToken);
             }
         }

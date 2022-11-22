@@ -12,14 +12,17 @@ public class GoodsDTO {
     private Long id;
     private String name;
     private String type;
-    private String manufacturer;
     private Double price;
+    private Integer discount;
+    private String description;
+    private String aDescription;
+    private String review;
     private Integer count;
 
-    public static GoodsDTO of(String name, String type, String manufacturer, Double price, Integer count){
-        return new GoodsDTO(null, name, type, manufacturer, price, count);
+    public static GoodsDTO of(String name, String type, Double price, Integer discount, String description, String aDescription, String review, Integer count){
+        return new GoodsDTO(null, name, type, price, discount, description, aDescription, review, count);
     }
-    public static GoodsDTO of(Long id, String name, String type, String manufacturer, Double price, Integer count) {
-        return new GoodsDTO(id, name, type, manufacturer, price, count);
+    public static GoodsDTO of(Long id, String name, String type, Double price, Integer discount, String description, String aDescription, String review, Integer count) {
+        return new GoodsDTO(id, name, type, price, discount, description, aDescription, review, count);
     }
 }

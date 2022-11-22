@@ -24,18 +24,47 @@ public class AppConfig {
     @Bean
     public CommandLineRunner demo(final GoodsService goodsService, final UserService userService) {
         return strings -> {
-            goodsService.addGoods(GoodsDTO.of("test1", "testType", "mi", 1.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test2", "testType", "mi", 0.01, 5));
-            goodsService.addGoods(GoodsDTO.of("test3", "testType", "xiaomi", 0.10, 5));
-            goodsService.addGoods(GoodsDTO.of("test4", "testType", "xiaomi", 10.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test5", "testType", "xiaomi", 15.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test6", "testType", "apple", 100.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test7", "testType", "samsung", 110.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test8", "testType", "samsung", 150.00, 5));
-            goodsService.addGoods(GoodsDTO.of("test9", "testType", "samsung", 10.10, 5));
-            goodsService.addGoods(GoodsDTO.of("test10", "testType", "apple", 11.11, 5));
-            goodsService.addGoods(GoodsDTO.of("test11", "testType", "apple", 1010.00, 5));
-            userService.addUser(UserDTO.of("user1", passwordEncoder().encode("1234"), null,null,null, Role.ADMIN));
+            String description = "Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.\n" +
+                    "\n" +
+                    "Lorem ipsum dolor sit amet.\n" +
+                    "Tempore reiciendis reprehenderit cum molestiae!\n" +
+                    "Esse ipsum voluptates culpa voluptas!\n" +
+                    "Velit expedita voluptatem repudiandae veniam!\n" +
+                    "Fugit in voluptatem aperiam iure?\n" +
+                    "Incidunt commodi minus ea! Ullam?\n" +
+                    "Sed accusantium facere doloribus consequatur.\n" +
+                    "Doloribus aut excepturi cum sapiente.\n" +
+                    "Laborum tempora voluptate unde perferendis.\n" +
+                    "Quasi ipsam quo minus delectus!";
+
+            String aDescription = "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Donec sed odio dui.\n" +
+                    "\n" +
+                    "Lorem ipsum dolor sit amet.\n" +
+                    "Veniam voluptatem sequi consequuntur in.\n" +
+                    "Ut nihil ad nobis tempora?\n" +
+                    "Sapiente, adipisci. Saepe, repudiandae molestiae.\n" +
+                    "Eos ut cumque harum minus!";
+
+            String review = "Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue";
+
+            goodsService.addGoods(GoodsDTO.of("Ice Cream Covered With Chocolate & Nuts", "Cakes", 10.00, 50, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Organic Mushroom", "Cakes", 100.00, 50, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Green Peppercorn", "Vegetables", 1.00, 0, description, aDescription, review, 8));
+            goodsService.addGoods(GoodsDTO.of("Vegetable Smoothie", "Smoothie", 50.00, 18, description, aDescription, review, 10));
+            goodsService.addGoods(GoodsDTO.of("Banana Blossoms", "Vegetables", 60.00, 50, description, aDescription, review, 40));
+            goodsService.addGoods(GoodsDTO.of("Purple Cabbage", "Vegetables", 60.00, 50, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Pomegranate Juice", "Vegetables", 60.00, 50, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Green Detox Drink", "Vegetables", 30.00, 0, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Fresh Tomatoes", "Vegetables", 200.00, 50, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Cabbage", "Vegetables", 100.00, 0, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Detox Fresh Mango Smoothie", "Smoothie", 30.00, 0, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Fresh Detox Blueberries", "Smoothie", 30.00, 0, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Colorful Popsicles Isolated", "Smoothie", 60.00, 50, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Cappuccino Ice Cream", "Smoothie", 60.00, 50, description, aDescription, review, 50));
+            goodsService.addGoods(GoodsDTO.of("Detox Fresh Mango Juice", "Juice", 30.00, 0, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Simple Kiwi Juice", "Juice", 30.00, 0, description, aDescription, review, 5));
+            goodsService.addGoods(GoodsDTO.of("Apple", "Fruits", 200.00, 50, description, aDescription, review, 50));
+
             userService.addUser(UserDTO.of("user", passwordEncoder().encode("1234"), "userName", null,null, Role.USER));
             userService.addUser(UserDTO.of("admin", passwordEncoder().encode("12345"), "adminName", null, null, Role.ADMIN));
         };

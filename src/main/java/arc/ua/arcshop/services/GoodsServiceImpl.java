@@ -1,6 +1,7 @@
 package arc.ua.arcshop.services;
 
 import arc.ua.arcshop.dto.GoodsDTO;
+import arc.ua.arcshop.dto.GoodsShortDTO;
 import arc.ua.arcshop.model.Goods;
 import arc.ua.arcshop.model.QGoods;
 import arc.ua.arcshop.repository.GoodsRepository;
@@ -36,13 +37,10 @@ public class GoodsServiceImpl implements GoodsService{
 
     @Transactional(readOnly = true)
     @Override
-    public List<GoodsDTO> getGoods(Pageable pageable,String manufacturer, String name, String type, int min, int max) {
+    public List<GoodsShortDTO> getGoods(Pageable pageable, String name, String type, int min, int max) {
 
         QGoods goods = QGoods.goods;
         BooleanBuilder booleanBuilder = new BooleanBuilder();
-        if(manufacturer != null){
-            booleanBuilder.and(goods.manufacturer.eq(manufacturer));
-        }
         if(name != null){
             booleanBuilder.and(goods.name.eq(name));
         }
@@ -51,15 +49,24 @@ public class GoodsServiceImpl implements GoodsService{
         }
         booleanBuilder.and(goods.price.between(min,max));
         List<Goods> list = goodsRepository.findAll(booleanBuilder,pageable).getContent();
-        List<GoodsDTO> res = new ArrayList<>();
+        List<GoodsShortDTO> res = new ArrayList<>();
 
         for (Goods g : list)
-            res.add(g.toDTO());
+            res.add(g.toShortDTO());
 
         return res;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
+    @Override
+    public GoodsDTO getGood(long id){
+        if(goodsRepository.findById(id).isPresent()){
+            return goodsRepository.findById(id).get().toDTO();
+        }
+        return null;
+    }
+
+    @Transactional /////////////////check
     @Override
     public boolean updateGoods(GoodsDTO goodsDTO){
         if( ! goodsRepository.existsByName(goodsDTO.getName()))

@@ -1,6 +1,7 @@
 package arc.ua.arcshop.model;
 
 import arc.ua.arcshop.dto.GoodsDTO;
+import arc.ua.arcshop.dto.GoodsShortDTO;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,33 +20,57 @@ public class Goods {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String type;
-    @Column(nullable = false)
-    private String manufacturer;
+
     @Column(nullable = false)
     private Double price;
+
+    @Column(nullable = false)
+    private Integer discount;
+
+    @Lob
+    @Column(nullable = false)
+    private String description;
+
+    @Lob
+    @Column(nullable = false)
+    private String aDescription;
+
+    @Lob
+    @Column(nullable = false)
+    private String review;
     @Column(nullable = false)
     private Integer count;
 
-    public Goods(String name, String type, String manufacturer, Double price, Integer count) {
+    public Goods(String name, String type, Double price, Integer discount, String description, String aDescription, String review, Integer count) {
         this.name = name;
         this.type = type;
-        this.manufacturer = manufacturer;
         this.price = price;
+        this.discount = discount;
+        this.description = description;
+        this.aDescription = aDescription;
+        this.review = review;
         this.count = count;
     }
 
-    public static Goods of(String name,String type, String manufacturer, Double price, Integer count) {
-        return new Goods(name,type, manufacturer, price, count);
+    public static Goods of(String name, String type, Double price, Integer discount, String description, String aDescription, String review, Integer count) {
+        return new Goods(name, type, price, discount, description, aDescription, review, count);
+    }
+
+    public GoodsDTO toDTO() {
+        return GoodsDTO.of(id, name, type, price, discount, description, aDescription, review, count);
     }
 
     public static Goods fromDTO(GoodsDTO goodsDTO){
-       return Goods.of(goodsDTO.getName(),goodsDTO.getType(),goodsDTO.getManufacturer(),goodsDTO.getPrice(),goodsDTO.getCount());
+        return of(goodsDTO.getName(), goodsDTO.getType(), goodsDTO.getPrice(), goodsDTO.getDiscount(), goodsDTO.getDescription(), goodsDTO.getADescription(), goodsDTO.getReview(), goodsDTO.getCount());
     }
-    public GoodsDTO toDTO() {
-        return GoodsDTO.of(id, name, type, manufacturer, price, count);
+    public GoodsShortDTO toShortDTO() {
+        return GoodsShortDTO.of(id, name, type, price, discount);
     }
+
 }

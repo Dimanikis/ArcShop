@@ -24,28 +24,32 @@ public class AppConfig {
     @Bean
     public CommandLineRunner demo(final GoodsService goodsService, final UserService userService) {
         return strings -> {
-            String description = "Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.\n" +
-                    "\n" +
-                    "Lorem ipsum dolor sit amet.\n" +
-                    "Tempore reiciendis reprehenderit cum molestiae!\n" +
-                    "Esse ipsum voluptates culpa voluptas!\n" +
-                    "Velit expedita voluptatem repudiandae veniam!\n" +
-                    "Fugit in voluptatem aperiam iure?\n" +
-                    "Incidunt commodi minus ea! Ullam?\n" +
-                    "Sed accusantium facere doloribus consequatur.\n" +
-                    "Doloribus aut excepturi cum sapiente.\n" +
-                    "Laborum tempora voluptate unde perferendis.\n" +
-                    "Quasi ipsam quo minus delectus!";
+            String description = """
+                    Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra. Version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.
+                    Lorem ipsum dolor sit amet.
+                    Tempore reiciendis reprehenderit cum molestiae!
+                    Esse ipsum voluptates culpa voluptas!
+                    Velit expedita voluptatem repudiandae veniam!
+                    Fugit in voluptatem aperiam iure?
+                    Incidunt commodi minus ea! Ullam?
+                    Sed accusantium facere doloribus consequatur.
+                    Doloribus aut excepturi cum sapiente.
+                    Laborum tempora voluptate unde perferendis.
+                    Quasi ipsam quo minus delectus!
+                    """;
 
-            String aDescription = "Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Donec sed odio dui.\n" +
-                    "\n" +
-                    "Lorem ipsum dolor sit amet.\n" +
-                    "Veniam voluptatem sequi consequuntur in.\n" +
-                    "Ut nihil ad nobis tempora?\n" +
-                    "Sapiente, adipisci. Saepe, repudiandae molestiae.\n" +
-                    "Eos ut cumque harum minus!";
+            String aDescription = """
+                    Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Donec sed odio dui.
+                    Lorem ipsum dolor sit amet.
+                    Veniam voluptatem sequi consequuntur in.
+                    Ut nihil ad nobis tempora?
+                    Sapiente, adipisci. Saepe, repudiandae molestiae.
+                    Eos ut cumque harum minus!
+                    """;
 
-            String review = "Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue";
+            String review = """
+            Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue
+            """;
 
             goodsService.addGoods(GoodsDTO.of("Ice Cream Covered With Chocolate & Nuts", "Cakes", 10.00, 50, description, aDescription, review, 5));
             goodsService.addGoods(GoodsDTO.of("Organic Mushroom", "Cakes", 100.00, 50, description, aDescription, review, 50));
